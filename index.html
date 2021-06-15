@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: cursive;
+        height: 100vh;
+        background: linear-gradient(130deg, #8052ec, #d161ff);
+        overflow: hidden;
+    }
+    .container {
+        /* border:2px solid white; */
+        width: 40%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        padding: 30px 40px;
+    }
+    #newtask{
+        background-color: white;
+        padding: 30px 20px;
+        border-radius: 5px;
+        box-shadow: 0 15px 330px rgba(0,0,0, 0.3,);
+    }
+    #newtask input{
+        width: 60%;
+        height: 15px;
+        font-family: cursive;
+        font-size: 15px;
+        padding: 12px;
+        border: 2px solid #d1d3d4;
+        position: relative;
+        font-weight: 500;
+        color: #111111;
+    }
+
+    #newtask input:focus{
+        outline: none;
+        border-color: #8052ec;
+    }
+    #newtask button{
+        position: relative;
+        float: right;
+        width: 20%;
+        height: 45px;
+        font-family: cursive;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: #8052ec;
+        border:none;
+        color: #ffffff;
+        cursor: pointer;
+    }
+    #tasks{
+        padding: 30px 20px;
+        background-color: #ffffff;
+        margin-top: 60px;
+        border-radius: 10px;
+        box-shadow: 0 15px 330px rgba(0,0,0, 0.3,);
+        /* width: 100%; */
+        position: relative;
+    }
+    .task{
+        background-color: #ffffff;
+        height: 50px;
+        /* padding: 5px 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        border-bottom: 2px sold #d1d3d4;
+    }
+    .task span{
+        font-family: cursive;
+        font-size: 15px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+    .task button{
+        background-color: #8052ec;
+        /* color: #ffffff; */
+        color: black;
+        height: 100%;
+        border-bottom: 5px;
+        width: 40px;
+        cursor: pointer;
+        outline: none;
+    }
+    .completed{
+        text-decoration: line-through;
+        cursor: pointer;
+    }
+    h2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: blanchedalmond;
+        font-size: 30px;
+        position: absolute;
+        left: 43%;
+        top: 5%;
+        /* margin-top: 30px; */
+    }
+</style>
+<body>
+    <h2 class="h2">myTodo App!!!</h2>
+    <div class="container">
+        <div id="newtask">
+            <input type="text" placeholder="task to be done...">
+            <button id="push">Add</button>
+        </div>
+        <div id="tasks">
+
+        </div>
+    </div>
+    <script>
+        document.querySelector('#push').onclick = function(){
+            if(document.querySelector('#newtask input').value.length == 0){
+                alert('please enter a task')
+            }
+            else{
+                document.querySelector('#tasks').innerHTML += `
+                    <div class="task">
+                            <span id="taskname">
+                                ${document.querySelector('#newtask input').value}
+                            </span>
+                            <button class="delete">
+                                Del
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                    </div>
+                `
+                var current_tasks = document.querySelectorAll('.delete');
+                for(var i=0; i<current_tasks.length; i++){
+                    current_tasks[i].onclick = function(){
+                        this.parentNode.remove();
+                    }
+                }
+                var tasks = document.querySelectorAll(".task")
+                for (let i = 0; i < tasks.length; i++) {
+                    tasks[i].onclick = function(){
+                        this.classList.toggle('completed')
+                    }                    
+                }
+                document.querySelector('#newtask input').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
